@@ -132,6 +132,13 @@ MusicControls.listen();
 ```javascript
 MusicControls.updateIsPlaying(true); // toggle the play/pause notification button
 MusicControls.updateDismissable(true);
+
+
+```
+
+- disableWebViewOptimizations:
+```javascript
+MusicControls.disableWebViewOptimizations(true);
 ```
 
 - iOS Specific Events:
