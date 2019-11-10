@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.bluetooth.BluetoothDevice;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -58,32 +59,30 @@ public class MusicControls extends CordovaPlugin {
 
 	private void registerBroadcaster(MusicControlsBroadcastReceiver mMessageReceiver){
 		final Context context = this.cordova.getActivity().getApplicationContext();
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-previous"));
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-pause"));
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-play"));
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-next"));
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-media-button"));
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter("music-controls-destroy"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-previous"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-pause"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-play"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-next"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-media-button"));
+		context.registerReceiver(mMessageReceiver, new IntentFilter("music-controls-destroy"));
 
 		// Listen for headset plug/unplug
-		context.registerReceiver((BroadcastReceiver)mMessageReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+		context.registerReceiver(mMessageReceiver, new IntentFilter(Intent.ACTION_HEADSET_PLUG));
+                context.registerReceiver(mMessageReceiver, new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED));
+                context.registerReceiver(mMessageReceiver, new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED));
 	}
 
 	// Register pendingIntent for broacast
 	public void registerMediaButtonEvent(){
-
-		this.mediaSessionCompat.setMediaButtonReceiver(this.mediaButtonPendingIntent);
-
-		/*if (this.mediaButtonAccess && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2){
-		this.mAudioManager.registerMediaButtonEventReceiver(this.mediaButtonPendingIntent);
-		}*/
+		if (this.mediaButtonAccess){
+			this.mAudioManager.registerMediaButtonEventReceiver(this.mediaButtonPendingIntent);
+		}
 	}
 
 	public void unregisterMediaButtonEvent(){
-		this.mediaSessionCompat.setMediaButtonReceiver(null);
-		/*if (this.mediaButtonAccess && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2){
-		this.mAudioManager.unregisterMediaButtonEventReceiver(this.mediaButtonPendingIntent);
-		}*/
+		if (this.mediaButtonAccess){
+			this.mAudioManager.unregisterMediaButtonEventReceiver(this.mediaButtonPendingIntent);
+		}
 	}
 
 	public void destroyPlayerNotification(){

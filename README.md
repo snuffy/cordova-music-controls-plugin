@@ -1,6 +1,6 @@
 # Cordova Music Controls Plugin
 
-This is a fork with working Background playing on Android, Color etc.
+This is a fork with working Background playing on Android, Color...
 
 Pull Requests are welcome
 
@@ -82,6 +82,12 @@ function events(action) {
 			// Do something
 			break;
 		case 'music-controls-destroy':
+			// Do something
+			break;
+                case 'music-controls-bluetooth-device-connected':
+			// Do something
+			break;
+                case 'music-controls-bluetooth-device-disconnected':
 			// Do something
 			break;
 
