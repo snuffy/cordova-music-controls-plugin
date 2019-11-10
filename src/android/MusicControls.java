@@ -39,6 +39,9 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import android.view.View;
+import android.os.PowerManager;
+
 
 public class MusicControls extends CordovaPlugin {
 	private static final String TAG = "MusicControls";
