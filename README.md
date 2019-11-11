@@ -84,12 +84,6 @@ function events(action) {
 		case 'music-controls-destroy':
 			// Do something
 			break;
-                case 'music-controls-bluetooth-device-connected':
-			// Do something
-			break;
-                case 'music-controls-bluetooth-device-disconnected':
-			// Do something
-			break;
 
 		// External controls (iOS only)
     	case 'music-controls-toggle-play-pause' :
@@ -113,6 +107,12 @@ function events(action) {
 			// Do something
 			break;
 		case 'music-controls-headset-plugged':
+			// Do something
+			break;
+    case 'music-controls-bluetooth-device-connected':
+			// Do something
+			break;
+    case 'music-controls-bluetooth-device-disconnected':
 			// Do something
 			break;
 		default:
