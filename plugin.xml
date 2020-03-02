@@ -68,11 +68,6 @@
 	</platform>
 
 	<platform name="ios">
-		 <edit-config file="*-Info.plist" mode="merge" target="UIBackgroundModes">
-            <array>
-                <string>audio</string>
-            </array>
-        </edit-config>
 		<config-file target="config.xml" parent="/*">
 			<feature name="MusicControls">
 				<param name="ios-package" value="MusicControls" />
